@@ -2,6 +2,19 @@ const express = require('express');
 const crypto = require('crypto');
 const app = express();
 
+// Root endpoint for a friendly welcome
+app.get('/', (req, res) => {
+    res.json({
+        message: "Welcome to the Intelligent Load Balancer API",
+        status: "Running",
+        endpoints: {
+            balancer: "GET /route?ip=YOUR_IP",
+            metrics: "GET /metrics",
+            healthToggle: "POST /health/:nodeName"
+        }
+    });
+});
+
 const nodes = {
     "Node-A": { weight: 1, healthy: true, requests: 0 },
     "Node-B": { weight: 2, healthy: true, requests: 0 },
